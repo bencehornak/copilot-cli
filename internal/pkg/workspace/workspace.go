@@ -483,6 +483,11 @@ func (ws *Workspace) DeleteWorkspaceFile() error {
 	return ws.fs.Remove(filepath.Join(ws.CopilotDirAbs, SummaryFileName))
 }
 
+// EnvAddonsPath returns the relative path for the addons/ directory of environments.
+func (ws *Workspace) EnvAddonsPath() string {
+	return filepath.Join(environmentsDirName, addonsDirName)
+}
+
 // EnvAddonsAbsPath returns the absolute path for the addons/ directory of environments.
 func (ws *Workspace) EnvAddonsAbsPath() string {
 	return filepath.Join(ws.CopilotDirAbs, environmentsDirName, addonsDirName)
@@ -491,6 +496,11 @@ func (ws *Workspace) EnvAddonsAbsPath() string {
 // EnvAddonFileAbsPath returns the absolute path of an addon file for environments.
 func (ws *Workspace) EnvAddonFileAbsPath(fName string) string {
 	return filepath.Join(ws.EnvAddonsAbsPath(), fName)
+}
+
+// WorkloadAddonsPath returns the relative path for the addons/ directory file path of a given workload.
+func (ws *Workspace) WorkloadAddonsPath(name string) string {
+	return filepath.Join(name, addonsDirName)
 }
 
 // WorkloadAddonsAbsPath returns the absolute path for the addons/ directory file path of a given workload.
@@ -530,8 +540,9 @@ func (ws *Workspace) PipelineOverridesPath(name string) string {
 
 // ListRegularFiles returns a list of file paths to all the files under the dir (excluding directories).
 func (ws *Workspace) ListRegularFiles(dirPath string) ([]string, error) {
+	dirAbsPath := filepath.Join(ws.CopilotDirAbs, dirPath)
 	var names []string
-	files, err := ws.fs.ReadDir(dirPath)
+	files, err := ws.fs.ReadDir(dirAbsPath)
 	if err != nil {
 		return nil, err
 	}
