@@ -1179,7 +1179,7 @@ func TestWorkspace_ListFiles(t *testing.T) {
 			}
 
 			// WHEN
-			actualFileNames, actualErr := ws.ListFiles(tc.inDirPath)
+			actualFileNames, actualErr := ws.ListRegularFiles(tc.inDirPath)
 
 			// THEN
 			require.Equal(t, tc.wantedErr, actualErr)

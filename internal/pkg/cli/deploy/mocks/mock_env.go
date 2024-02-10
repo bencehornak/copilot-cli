@@ -69,19 +69,19 @@ func (mr *MockWorkspaceAddonsReaderPathGetterMockRecorder) EnvAddonsAbsPath() *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EnvAddonsAbsPath", reflect.TypeOf((*MockWorkspaceAddonsReaderPathGetter)(nil).EnvAddonsAbsPath))
 }
 
-// ListFiles mocks base method.
-func (m *MockWorkspaceAddonsReaderPathGetter) ListFiles(dirPath string) ([]string, error) {
+// ListRegularFiles mocks base method.
+func (m *MockWorkspaceAddonsReaderPathGetter) ListRegularFiles(dirPath string) ([]string, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListFiles", dirPath)
+	ret := m.ctrl.Call(m, "ListRegularFiles", dirPath)
 	ret0, _ := ret[0].([]string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// ListFiles indicates an expected call of ListFiles.
-func (mr *MockWorkspaceAddonsReaderPathGetterMockRecorder) ListFiles(dirPath interface{}) *gomock.Call {
+// ListRegularFiles indicates an expected call of ListRegularFiles.
+func (mr *MockWorkspaceAddonsReaderPathGetterMockRecorder) ListRegularFiles(dirPath interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFiles", reflect.TypeOf((*MockWorkspaceAddonsReaderPathGetter)(nil).ListFiles), dirPath)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListRegularFiles", reflect.TypeOf((*MockWorkspaceAddonsReaderPathGetter)(nil).ListRegularFiles), dirPath)
 }
 
 // Path mocks base method.

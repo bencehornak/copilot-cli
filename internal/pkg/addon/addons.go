@@ -43,7 +43,7 @@ type WorkspaceAddonsReader interface {
 	WorkloadAddonFileAbsPath(wkldName, fName string) string
 	EnvAddonsAbsPath() string
 	EnvAddonFileAbsPath(fName string) string
-	ListFiles(dirPath string) ([]string, error)
+	ListRegularFiles(dirPath string) ([]string, error)
 	ReadFile(fPath string) ([]byte, error)
 }
 
@@ -152,7 +152,7 @@ func (s *stack) encode(v any) (string, error) {
 
 func (p *parser) stack() (*stack, error) {
 	path := p.addonsDirPath()
-	fNames, err := p.ws.ListFiles(path)
+	fNames, err := p.ws.ListRegularFiles(path)
 	if err != nil {
 		return nil, fmt.Errorf("list addons under path %s: %w", path, &ErrAddonsNotFound{
 			ParentErr: err,

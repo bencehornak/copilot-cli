@@ -528,15 +528,17 @@ func (ws *Workspace) PipelineOverridesPath(name string) string {
 	return filepath.Join(ws.CopilotDirAbs, pipelinesDirName, name, overridesDirName)
 }
 
-// ListFiles returns a list of file paths to all the files under the dir.
-func (ws *Workspace) ListFiles(dirPath string) ([]string, error) {
+// ListRegularFiles returns a list of file paths to all the files under the dir (excluding directories).
+func (ws *Workspace) ListRegularFiles(dirPath string) ([]string, error) {
 	var names []string
 	files, err := ws.fs.ReadDir(dirPath)
 	if err != nil {
 		return nil, err
 	}
 	for _, f := range files {
-		names = append(names, f.Name())
+		if !f.IsDir() {
+			names = append(names, f.Name())
+		}
 	}
 	return names, nil
 }
