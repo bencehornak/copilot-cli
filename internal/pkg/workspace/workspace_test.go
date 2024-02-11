@@ -1132,7 +1132,7 @@ func TestWorkspace_WorkloadAddonFileAbsPath(t *testing.T) {
 	}
 }
 
-func TestWorkspace_ListFiles(t *testing.T) {
+func TestWorkspace_ListRegularFiles(t *testing.T) {
 	testCases := map[string]struct {
 		inDirPath string
 		fs        func() afero.Fs
@@ -1141,7 +1141,7 @@ func TestWorkspace_ListFiles(t *testing.T) {
 		wantedErr       error
 	}{
 		"dir not exist": {
-			inDirPath: "/copilot/webhook/addons",
+			inDirPath: "webhook/addons",
 			fs: func() afero.Fs {
 				fs := afero.NewMemMapFs()
 				fs.MkdirAll("/copilot/webhook/", 0755)
@@ -1154,7 +1154,7 @@ func TestWorkspace_ListFiles(t *testing.T) {
 			},
 		},
 		"retrieves file names": {
-			inDirPath: "/copilot/webhook/addons",
+			inDirPath: "webhook/addons",
 			fs: func() afero.Fs {
 				fs := afero.NewMemMapFs()
 				fs.MkdirAll("/copilot/webhook/addons", 0755)
@@ -1172,7 +1172,7 @@ func TestWorkspace_ListFiles(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			// GIVEN
 			ws := &Workspace{
-				CopilotDirAbs: "copilot/",
+				CopilotDirAbs: "/copilot/",
 				fs: &afero.Afero{
 					Fs: tc.fs(),
 				},
